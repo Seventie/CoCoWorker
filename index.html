@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamCal Terminal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "terminal-green": "#00FF00",
+                "terminal-bright": "#00ff41",
+                "terminal-red": "#FF3B3B",
+                "terminal-blue": "#4D88FF",
+                "terminal-deep-blue": "#1A3A66",
+                "terminal-orange": "#FFA500",
+                "terminal-black": "#000000",
+              },
+              fontFamily: {
+                "mono": ["JetBrains Mono", "IBM Plex Mono", "monospace"]
+              },
+            },
+          },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-terminal-black font-mono text-terminal-green selection:bg-terminal-green/30;
+                overflow-x: hidden;
+            }
+        }
+        
+        .crt-scanlines {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+        }
+
+        .terminal-glow {
+            text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+        }
+        
+        .blue-glow {
+            text-shadow: 0 0 8px rgba(77, 136, 255, 0.6);
+        }
+
+        .border-terminal {
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .input-terminal {
+            @apply bg-transparent border border-terminal-green/50 text-terminal-green placeholder:text-terminal-green/20 focus:ring-1 focus:ring-terminal-green/50 outline-none uppercase transition-all;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A3A66;
+            border: 1px solid #4D88FF;
+        }
+        
+        @keyframes typing {
+          from { width: 0 }
+          to { width: 100% }
+        }
+        
+        .typing-effect {
+          overflow: hidden;
+          white-space: nowrap;
+          animation: typing 1.5s steps(40, end);
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="crt-scanlines"></div>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
